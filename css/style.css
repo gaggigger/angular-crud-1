@@ -1,0 +1,70 @@
+.title {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+.mdl-data-table {
+    width: 100%;
+}
+.title-add-user {
+    text-transform: uppercase;
+    margin-top: 0;
+    font-weight: 700;
+    line-height: 24px;
+}
+.block-add-user {
+    position: relative;
+}
+.block-add-user:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -30px;
+    height: 100%;
+    width: 10px;
+    background-color: #ff4081;
+}
+
+/* Reset style of MDL */
+.mdl-textfield .mdl-button {
+    position: static;
+}
+
+.wrap-button {
+    padding: 20px 0 0;
+}
+.mdl-data-table__cell--non-numeric.mdl-data-table__cell--non-numeric.action {
+    text-align: center;
+    background-color: #eee;
+}
+
+/* ------------- Style error follow MDL ------------------------ */
+.mdl-textfield .mdl-textfield__input.ng-invalid {
+    border-color: rgba(0,0,0,.12);
+    box-shadow: none;
+}
+.mdl-textfield--floating-label.is-invalid .mdl-textfield__label {
+    color: rgba(0,0,0,.26);
+    font-size: 16px;
+}
+.mdl-textfield--floating-label.is-invalid.is-focused .mdl-textfield__label {
+    font-size: 12px;
+}
+.mdl-textfield.is-focused .mdl-textfield__label:after {
+    background-color: rgb(63,81,181);
+}
+
+.mdl-textfield--floating-label .mdl-textfield__input.ng-invalid-minlength ~ .mdl-textfield__label,
+.mdl-textfield--floating-label .mdl-textfield__input.ng-invalid-maxlength ~ .mdl-textfield__label {
+    color: #d50000;
+    font-size: 12px;
+}
+.mdl-textfield .mdl-textfield__input.ng-invalid-minlength ~ .mdl-textfield__label:after,
+.mdl-textfield .mdl-textfield__input.ng-invalid-maxlength ~ .mdl-textfield__label:after {
+    background-color: #d50000;
+}
+/* ------------------------------------------------------------- */
+
+.message {
+    color: #d50000;
+}

@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "id": 1458119785539,
+      "name": "abc",
+      "username": "abc_user",
+      "email": "abc@email.com",
+      "address": "Sai Gon",
+      "phone": 54354354509
+    },
+    {
+      "id": 1458184698525,
+      "name": 3232,
+      "username": 2323,
+      "email": "23232@gm.com",
+      "address": 323232,
+      "phone": 3232323232
+    }
+  ]
+}
