@@ -1,4 +1,5 @@
 ### Important!
+---
 
 To view this demo, please follow some steps below:
 
@@ -8,7 +9,8 @@ To view this demo, please follow some steps below:
 4. Open file **index.ng.html** in browser and enjoy.
 
 ### Credits
+---
 
 + [Material Design Lite](https://www.getmdl.io/)
 + [Angular Sweet Alert](https://github.com/oitozero/ngSweetAlert)
-+ [Something]()
++ [Something else...]()

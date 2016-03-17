@@ -72,18 +72,22 @@
                         <p class="message" data-ng-show="form.username.$dirty && form.username.$error.maxlength">Too looong!</p>
                         <p class="message" data-ng-show="form.username.$dirty && form.username.$error.pattern">Invalid!</p>
                     </div>
+
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                         <input class="mdl-textfield__input" type="email" id="textfield-email" data-ng-model="email">
                         <label class="mdl-textfield__label" for="textfield-email">Email</label>
                     </div>
+
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                         <input class="mdl-textfield__input" type="text" id="textfield-address" data-ng-model="address">
                         <label class="mdl-textfield__label" for="textfield-address">Address</label>
                     </div>
+
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                         <input class="mdl-textfield__input" type="number" id="textfield-phone" data-ng-model="phone">
                         <label class="mdl-textfield__label" for="textfield-phone">Phone</label>
                     </div>
+
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label wrap-button">
                         <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent mdl-button--raised" type="submit" data-ng-click="create()" data-ng-disabled="form.$invalid">Add</button>
                     </div>
