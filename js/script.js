@@ -31,10 +31,6 @@ app.controller('UserController', function($scope, $http, SweetAlert) {
   $scope.users = [];
   var url = 'http://localhost:3000/users/';
 
-  // $scope.$watch('users', function(newValue, oldValue) {
-
-  // }, true);
-
   // GET
   $http({
     method: 'GET',
@@ -47,7 +43,7 @@ app.controller('UserController', function($scope, $http, SweetAlert) {
   });
 
   // DELETE
-  $scope.delete = function(id) {
+  $scope.delete = function(id, index) {
     // Using angular sweet alert to confirm delete or not?
     SweetAlert.swal({
       title: "Are you sure?",
@@ -67,6 +63,7 @@ app.controller('UserController', function($scope, $http, SweetAlert) {
           method: 'DELETE',
           url: url + id
         });
+        $scope.users.splice(index, 1);
         SweetAlert.swal("Deleted!", "This todo has been deleted.", "success");
       } else {
         SweetAlert.swal("Cancelled", "This todo is safe :)", "error");
@@ -88,7 +85,7 @@ app.controller('UserController', function($scope, $http, SweetAlert) {
         phone: $scope.phone
       }
     }).success(function(data) {
-      console.log('Create successed');
+      $scope.users.push(data);
     }).error(function(data, status, headers, config) {
       console.log('Create failed');
     });
