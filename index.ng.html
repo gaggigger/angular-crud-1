@@ -3,107 +3,147 @@
 <head>
     <meta charset="utf-8">
     <title>AngularJS -  HTTP</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.1.2/material.indigo-pink.min.css">
-    <link rel="stylesheet" href="css/sweetalert.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/sweetalert/dist/sweetalert.css">
+    <link rel="stylesheet" href="bower_components/ladda/dist/ladda-themeless.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="mdl-layout mdl-js-layout" data-ng-controller="UserController">
-        <!-- <h2 class="title">HTTP Request Demo</h2> -->
-        <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--8-col">
-                <table class="mdl-data-table mdl-data-table--selectable mdl-shadow--2dp">
-                    <thead>
-                        <tr>
-                            <th class="mdl-data-table__cell--non-numeric">Name</th>
-                            <th class="mdl-data-table__cell--non-numeric">Username</th>
-                            <th class="mdl-data-table__cell--non-numeric">Email</th>
-                            <th class="mdl-data-table__cell--non-numeric">Address</th>
-                            <th class="mdl-data-table__cell--non-numeric">Phone</th>
-                            <th class="mdl-data-table__cell--non-numeric action">Edit</th>
-                            <th class="mdl-data-table__cell--non-numeric action">Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr data-ng-repeat="user in users track by $index">
-                            <td class="mdl-data-table__cell--non-numeric">{{user.name}}</td>
-                            <td class="mdl-data-table__cell--non-numeric">{{user.username}}</td>
-                            <td class="mdl-data-table__cell--non-numeric">{{user.email}}</td>
-                            <td class="mdl-data-table__cell--non-numeric">{{user.address}}</td>
-                            <td class="mdl-data-table__cell--non-numeric">{{user.phone}}</td>
-                            <td class="mdl-data-table__cell--non-numeric action">
-                                <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent mdl-button--raised" data-ng-click="edit(user.id)">
-                                    Edit
-                                </button>
-                            </td>
-                            <td class="mdl-data-table__cell--non-numeric action">
-                                <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent mdl-button--raised" data-ng-click="delete(user.id, $index)">
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="mdl-cell mdl-cell--3-col mdl-cell--1-offset block-add-user">
-                <h4 class="title-add-user">Add user</h4>
-                <form action="#" novalidate name="form">
-                    <div>
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" type="text" id="textfield-name" name="name" data-ng-model="name" data-ng-minlength="3" data-ng-maxlength="20" required>
-                            <label class="mdl-textfield__label" for="textfield-name">Name</label>
-                        </div>
-                        <!-- Validate message -->
-                        <p class="message" data-ng-show="form.name.$dirty && form.name.$error.required">Required!</p>
-                        <p class="message" data-ng-show="form.name.$dirty && form.name.$error.minlength">Too short!</p>
-                        <p class="message" data-ng-show="form.name.$dirty && form.name.$error.maxlength">Too looong!</p>
-                    </div>
-
-                    <div>
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" type="text" id="textfield-username" name="username" data-ng-model="username" data-ng-pattern="/[0-9a-z\_]/g" data-ng-minlength="3" data-ng-maxlength="20" required>
-                            <label class="mdl-textfield__label" for="textfield-username">Username</label>
-                        </div>
-                        <!-- Validate message -->
-                        <p class="message" data-ng-show="form.username.$dirty && form.username.$error.required">Required!</p>
-                        <p class="message" data-ng-show="form.username.$dirty && form.username.$error.minlength">Too short!</p>
-                        <p class="message" data-ng-show="form.username.$dirty && form.username.$error.maxlength">Too looong!</p>
-                        <p class="message" data-ng-show="form.username.$dirty && form.username.$error.pattern">Invalid!</p>
-                    </div>
-
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="email" id="textfield-email" data-ng-model="email">
-                        <label class="mdl-textfield__label" for="textfield-email">Email</label>
-                    </div>
-
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="textfield-address" data-ng-model="address">
-                        <label class="mdl-textfield__label" for="textfield-address">Address</label>
-                    </div>
-
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="number" id="textfield-phone" data-ng-model="phone">
-                        <label class="mdl-textfield__label" for="textfield-phone">Phone</label>
-                    </div>
-
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label wrap-button">
-                        <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent mdl-button--raised" type="submit" data-ng-click="create()" data-ng-disabled="form.$invalid">Add</button>
-                    </div>
+    <div class="container" data-ng-controller="UserController">
+        <div class="row">
+            <div class="col-md-8">
+                <h3 class="title">Demo crud app</h3>
+                <form action="#">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Address</th>
+                                <th>Phone</th>
+                                <th class="action">Edit</th>
+                                <th class="action">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-ng-repeat="user in users track by $index">
+                                <td>
+                                    <input class="form-control" type="text" value="{{user.name}}">
+                                </td>
+                                <td>
+                                    <input class="form-control" type="text" value="{{user.username}}" data-ng-model="username">
+                                </td>
+                                <td>
+                                    <input class="form-control" type="text" value="{{user.email}}" data-ng-model="email">
+                                </td>
+                                <td>
+                                    <input class="form-control" type="text" value="{{user.address}}" data-ng-model="address">
+                                </td>
+                                <td>
+                                    <input class="form-control" type="text" value="{{user.phone}}" data-ng-model="phone">
+                                </td>
+                                <td class="action">
+                                    <button class="btn btn-info" type="button" data-ng-click="edit(user.id)">Edit</button>
+                                </td>
+                                <td class="action">
+                                    <button class="btn btn-danger" type="button" data-ng-click="delete(user.id, $index)">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </form>
             </div>
+            <div class="col-md-3 col-md-offset-1">
+                <div class="block-add-user">
+                    <h4 class="title-add-user">Add user</h4>
+                    <form action="#" novalidate name="form">
+                        <div class="form-group"
+                             data-ng-class="{
+                                'has-error': form.name.$dirty &&  (form.name.$error.required || form.name.$error.minlength || form.name.$error.maxlength),
+                                'has-success': form.name.$valid}">
+                            <input class="form-control"
+                                   type="text"
+                                   name="name"
+                                   data-ng-model="name"
+                                   data-ng-minlength="3"
+                                   data-ng-maxlength="20"
+                                   placeholder="Name"
+                                   required>
+                            <!-- Validate message -->
+                            <p class="help-block" data-ng-show="form.name.$dirty && form.name.$error.required">Required!</p>
+                            <p class="help-block" data-ng-show="form.name.$dirty && form.name.$error.minlength">Too short!</p>
+                            <p class="help-block" data-ng-show="form.name.$dirty && form.name.$error.maxlength">Too looong!</p>
+                        </div>
 
-            <pre>{{form | json}}</pre>
+                        <div class="form-group"
+                             data-ng-class="{
+                                'has-error': form.username.$dirty &&  (form.username.$error.required || form.username.$error.minlength || form.username.$error.maxlength || form.username.$error.pattern),
+                                'has-success': form.username.$valid}">
+                            <input class="form-control"
+                                   type="text"
+                                   name="username"
+                                   data-ng-model="username"
+                                   data-ng-pattern="/[0-9a-z\_]/g"
+                                   data-ng-minlength="3"
+                                   data-ng-maxlength="20"
+                                   placeholder="Username"
+                                   required>
+                            <!-- Validate message -->
+                            <p class="help-block" data-ng-show="form.username.$dirty && form.username.$error.required">Required!</p>
+                            <p class="help-block" data-ng-show="form.username.$dirty && form.username.$error.minlength">Too short!</p>
+                            <p class="help-block" data-ng-show="form.username.$dirty && form.username.$error.maxlength">Too looong!</p>
+                            <p class="help-block" data-ng-show="form.username.$dirty && form.username.$error.pattern">Invalid!</p>
+                        </div>
+
+                        <div class="form-group"
+                             data-ng-class="{
+                                'has-error': form.email.$dirty && (form.email.$error.required || form.email.$error.email),
+                                'has-success': form.email.$valid}">
+                            <input class="form-control"
+                                   type="email"
+                                   name="email"
+                                   data-ng-model="email"
+                                   placeholder="Email"
+                                   required>
+                            <!-- Validate message -->
+                            <p class="help-block" data-ng-show="form.email.$dirty && form.email.$error.required">Required!</p>
+                            <p class="help-block" data-ng-show="form.email.$dirty && form.email.$error.email">Invalid!</p>
+                        </div>
+
+                        <div class="form-group">
+                            <input class="form-control" type="text" data-ng-model="address" placeholder="Address (optional)">
+                        </div>
+
+                        <div class="form-group">
+                            <input class="form-control" type="number" data-ng-model="phone" placeholder="Phone (optional)">
+                        </div>
+
+                        <div class="form-group">
+                            <button class="btn btn-success" type="submit" ladda="createLo" data-ng-click="create()" data-ng-disabled="form.$invalid">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
+        <pre>{{form | json}}</pre>
     </div>
 
 
+
     <!-- Script -->
-    <script src="js/angular.min.js"></script>
-    <script src="https://code.getmdl.io/1.1.2/material.min.js"></script>
-    <script src="js/sweetalert.min.js"></script>
-    <script src="js/SweetAlert.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Sweetalert -->
+    <script src="bower_components/ngSweetAlert/SweetAlert.min.js"></script>
+    <script src="bower_components/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- Ladda button -->
+    <script src="bower_components/ladda/dist/spin.min.js"></script>
+    <script src="bower_components/ladda/dist/ladda.min.js"></script>
+    <script src="bower_components/angular-ladda/dist/angular-ladda.min.js"></script>
+    <!-- Main -->
     <script src="js/script.js"></script>
 </body>
 </html>

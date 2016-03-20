@@ -1,0 +1,31 @@
+{
+  "name": "Angular CRUD App",
+  "homepage": "index.ng.html",
+  "authors": [
+    "Tin Ha"
+  ],
+  "description": "Demo angular CRUD app with Json server fake API",
+  "main": "index.ng.html",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "angular-crud",
+    "json-api"
+  ],
+  "license": "no",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6",
+    "angular": "~1.5.2",
+    "ngSweetAlert": "angular-sweetalert#~1.1.0",
+    "angular-ladda": "~0.3.4"
+  }
+}
