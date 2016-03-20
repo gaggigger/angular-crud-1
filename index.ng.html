@@ -27,21 +27,24 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <tr data-ng-show="users.length == 0">
+                                <td class="text-center" colspan="7">No user in here!</td>
+                            </tr>
                             <tr data-ng-repeat="user in users track by $index">
                                 <td>
-                                    <input class="form-control" type="text" value="{{user.name}}">
+                                    <input class="form-control" type="text" value="{{user.name}}" data-ng-model="editName">
                                 </td>
                                 <td>
-                                    <input class="form-control" type="text" value="{{user.username}}" data-ng-model="username">
+                                    <input class="form-control" type="text" value="{{user.username}}" data-ng-model="editUsername">
                                 </td>
                                 <td>
-                                    <input class="form-control" type="text" value="{{user.email}}" data-ng-model="email">
+                                    <input class="form-control" type="text" value="{{user.email}}" data-ng-model="editEmail">
                                 </td>
                                 <td>
-                                    <input class="form-control" type="text" value="{{user.address}}" data-ng-model="address">
+                                    <input class="form-control" type="text" value="{{user.address}}" data-ng-model="editAddress">
                                 </td>
                                 <td>
-                                    <input class="form-control" type="text" value="{{user.phone}}" data-ng-model="phone">
+                                    <input class="form-control" type="text" value="{{user.phone}}" data-ng-model="editPhone">
                                 </td>
                                 <td class="action">
                                     <button class="btn btn-info" type="button" data-ng-click="edit(user.id)">Edit</button>
