@@ -22,7 +22,7 @@
         var self = this;
 
         $scope.users = [];
-        var url = 'http://localhost:3000/users/';
+        var url = 'http://localhost:3000/users';
 
         // GET
         $http({
@@ -70,18 +70,22 @@
             $http({
                 method: 'POST',
                 url: url,
-                data: {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Accept': 'application/json'
+                },
+                data: $.param({
                     id: new Date().getTime(),
                     name: $scope.name,
                     username: $scope.username,
                     email: $scope.email,
                     address: $scope.address,
                     phone: $scope.phone
-                }
+                })
             }).success(function(data) {
-                $scope.createLoading = false;
-                // $scope.users.push(data);
-                // console.log(data);
+                // $scope.createLoading = false;
+                $scope.users.push(data);
+                console.log(data);
                 // $timeout(function() {
                 //   // Reset input field
                 //   $scope.name = '';
