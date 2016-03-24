@@ -4,28 +4,37 @@
     angular
         .module('http-app', [
             'oitozero.ngSweetAlert',
-            'angular-ladda'
+            'angular-ladda',
+            'toaster',
+            'ngAnimate',
+            'xeditable'
         ])
         .config(laddaConfig)
-        .controller('UserController', UserController);
+        .run(editableConfig)
+        .controller('UserController', UserController)
+        .filter('', function() {});
 
     // Function ladda config
     function laddaConfig(laddaProvider) {
         laddaProvider.setOption({
             style: 'expand-right',
-            spinnerColor: '#fff'
+            spinnerColor: '#FFF'
         });
     }
 
-    // Function Usercontroller
-    function UserController($scope, $http, SweetAlert, $timeout) {
-        var self = this;
+    // Function editable config
+    function editableConfig(editableOptions) {
+        editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+    }
 
+    // Function Usercontroller
+    function UserController($scope, $http, SweetAlert, $timeout, toaster) {
         $scope.users = [];
         $scope.temp = {};
         var url = 'http://localhost:3000/users/';
 
         // GET
+        // ---
         $http({
             method: 'GET',
             url: url
@@ -37,7 +46,8 @@
         });
 
         // DELETE
-        $scope.delete = function(id, index) {
+        // ------
+        $scope.delete = function(id, index, name) {
             // Using angular sweet alert to confirm delete or not?
             SweetAlert.swal({
                 title: "Are you sure?",
@@ -57,8 +67,12 @@
                     $http({
                         method: 'DELETE',
                         url: url + id
+                    }).success(function() {
+                        toaster.pop('success', "Deleted success", "User " + name + " has been deleted");
+                        SweetAlert.swal("Deleted!", "This todo has been deleted.", "success");
+                    }).error(function() {
+                        toaster.pop('error', "Delete failed", "User" + name + "can not be deleted");
                     });
-                    SweetAlert.swal("Deleted!", "This todo has been deleted.", "success");
                 } else {
                     SweetAlert.swal("Cancelled", "This todo is safe :)", "error");
                 }
@@ -66,8 +80,10 @@
         };
 
         // CREATE
+        // ------
         $scope.create = function() {
             $scope.createLoading = true;
+
             var formData = $scope.temp;
             formData.id = (new Date()).getTime();
 
@@ -82,7 +98,7 @@
             }).success(function(data) {
                 $scope.createLoading = false;
                 $scope.users.push(data);
-                console.log(data);
+                // console.log(data);
 
                 // Reset input field
                 var master = {
@@ -94,9 +110,11 @@
                 };
                 $scope.temp = angular.copy(master);
                 $scope.formAdd.$setPristine();
-                console.log('reseted');
+                // console.log('reseted');
+
+                toaster.pop('success', "Created success");
             }).error(function(data, status, headers, config) {
-                console.log('Create failed');
+                toaster.pop('error', "Can not created");
             });
         };
     }

@@ -26,6 +26,8 @@
     "bootstrap": "~3.3.6",
     "angular": "~1.5.2",
     "ngSweetAlert": "angular-sweetalert#~1.1.0",
-    "angular-ladda": "~0.3.4"
+    "angular-ladda": "~0.3.4",
+    "AngularJS-Toaster": "angularjs-toaster#~1.2.0",
+    "angular-xeditable": "~0.1.11"
   }
 }

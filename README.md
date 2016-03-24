@@ -3,15 +3,17 @@
 
 To view this demo, please follow some steps below:
 
-1. Run `bower install`
+1. Run `git clone https://github.com/hahuutin/angular-crud.git`
+2. Run `cd angular-crud`
 2. Run `npm install -g json-server`
-3. cd **projectname**
+1. Run `bower install`
 4. Run `json-server --watch db.json`
-5. Open file **index.ng.html** in browser and feeling :))
+5. Open file **index.html** in browser and feeling :))
 
 ### Credits
 ---
 
-+ [Material Design Lite](https://www.getmdl.io/)
++ [Bootstrap](https://github.com/twbs/bootstrap)
 + [Angular Sweet Alert](https://github.com/oitozero/ngSweetAlert)
-+ [Something else...]()
++ [Angular Ladda](https://github.com/remotty/angular-ladda)
++ [Angular Toaster](https://github.com/jirikavi/AngularJS-Toaster)
