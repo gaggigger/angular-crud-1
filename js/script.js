@@ -22,7 +22,8 @@
         var self = this;
 
         $scope.users = [];
-        var url = 'http://localhost:3000/users';
+        $scope.temp = {};
+        var url = 'http://localhost:3000/users/';
 
         // GET
         $http({
@@ -52,11 +53,11 @@
             // Confirm delete or not?
             function(isConfirm) {
                 if (isConfirm) {
+                    $scope.users.splice(index, 1);
                     $http({
                         method: 'DELETE',
                         url: url + id
                     });
-                    $scope.users.splice(index, 1);
                     SweetAlert.swal("Deleted!", "This todo has been deleted.", "success");
                 } else {
                     SweetAlert.swal("Cancelled", "This todo is safe :)", "error");
@@ -67,6 +68,9 @@
         // CREATE
         $scope.create = function() {
             $scope.createLoading = true;
+            var formData = $scope.temp;
+            formData.id = (new Date()).getTime();
+
             $http({
                 method: 'POST',
                 url: url,
@@ -74,35 +78,26 @@
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'Accept': 'application/json'
                 },
-                data: $.param({
-                    id: new Date().getTime(),
-                    name: $scope.name,
-                    username: $scope.username,
-                    email: $scope.email,
-                    address: $scope.address,
-                    phone: $scope.phone
-                })
+                data: $.param(formData)
             }).success(function(data) {
-                // $scope.createLoading = false;
+                $scope.createLoading = false;
                 $scope.users.push(data);
                 console.log(data);
-                // $timeout(function() {
-                //   // Reset input field
-                //   $scope.name = '';
-                //   $scope.username = '';
-                //   $scope.email = '';
-                //   $scope.address = '';
-                //   $scope.phone = '';
-                //   console.log('reseted');
-                // }, 2000);
+
+                // Reset input field
+                var master = {
+                    name: '',
+                    username: '',
+                    email: '',
+                    address: '',
+                    phone: ''
+                };
+                $scope.temp = angular.copy(master);
+                $scope.formAdd.$setPristine();
+                console.log('reseted');
             }).error(function(data, status, headers, config) {
                 console.log('Create failed');
             });
-
-            console.log(data);
-            $timeout(function(){
-                $scope.createLoading = false;
-            }, 5000);
         };
     }
 })();

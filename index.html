@@ -12,8 +12,8 @@
     <div class="container" data-ng-controller="UserController">
         <div class="row">
             <div class="col-md-8">
-                <h3 class="title">Demo crud app</h3>
-                <form action="#">
+                <h3 class="title">Demo crud App</h3>
+                <form action="#" novalidate>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -32,19 +32,19 @@
                             </tr>
                             <tr data-ng-repeat="user in users track by $index">
                                 <td>
-                                    <input class="form-control" type="text" value="{{user.name}}" data-ng-model="editName">
+                                    {{user.name}}
                                 </td>
                                 <td>
-                                    <input class="form-control" type="text" value="{{user.username}}" data-ng-model="editUsername">
+                                    {{user.username}}
                                 </td>
                                 <td>
-                                    <input class="form-control" type="text" value="{{user.email}}" data-ng-model="editEmail">
+                                    {{user.email}}
                                 </td>
                                 <td>
-                                    <input class="form-control" type="text" value="{{user.address}}" data-ng-model="editAddress">
+                                    {{user.address}}
                                 </td>
                                 <td>
-                                    <input class="form-control" type="text" value="{{user.phone}}" data-ng-model="editPhone">
+                                    {{user.phone}}
                                 </td>
                                 <td class="action">
                                     <button class="btn btn-info" type="button" data-ng-click="edit(user.id)">Edit</button>
@@ -60,76 +60,76 @@
             <div class="col-md-3 col-md-offset-1">
                 <div class="block-add-user">
                     <h4 class="title-add-user">Add user</h4>
-                    <form action="#" novalidate name="form">
+                    <form action="#" novalidate name="formAdd">
                         <div class="form-group"
                              data-ng-class="{
-                                'has-error': form.name.$dirty &&  (form.name.$error.required || form.name.$error.minlength || form.name.$error.maxlength),
-                                'has-success': form.name.$valid}">
+                                'has-error': formAdd.name.$dirty &&  (formAdd.name.$error.required || formAdd.name.$error.minlength || formAdd.name.$error.maxlength),
+                                'has-success': formAdd.name.$valid}">
                             <input class="form-control"
                                    type="text"
                                    name="name"
-                                   data-ng-model="name"
+                                   data-ng-model="temp.name"
                                    data-ng-minlength="3"
                                    data-ng-maxlength="20"
                                    placeholder="Name"
                                    required>
                             <!-- Validate message -->
-                            <p class="help-block" data-ng-show="form.name.$dirty && form.name.$error.required">Required!</p>
-                            <p class="help-block" data-ng-show="form.name.$dirty && form.name.$error.minlength">Too short!</p>
-                            <p class="help-block" data-ng-show="form.name.$dirty && form.name.$error.maxlength">Too looong!</p>
+                            <p class="help-block" data-ng-show="formAdd.name.$dirty && formAdd.name.$error.required">Required!</p>
+                            <p class="help-block" data-ng-show="formAdd.name.$dirty && formAdd.name.$error.minlength">Too short!</p>
+                            <p class="help-block" data-ng-show="formAdd.name.$dirty && formAdd.name.$error.maxlength">Too looong!</p>
                         </div>
 
                         <div class="form-group"
                              data-ng-class="{
-                                'has-error': form.username.$dirty &&  (form.username.$error.required || form.username.$error.minlength || form.username.$error.maxlength || form.username.$error.pattern),
-                                'has-success': form.username.$valid}">
+                                'has-error': formAdd.username.$dirty &&  (formAdd.username.$error.required || formAdd.username.$error.minlength || formAdd.username.$error.maxlength || formAdd.username.$error.pattern),
+                                'has-success': formAdd.username.$valid}">
                             <input class="form-control"
                                    type="text"
                                    name="username"
-                                   data-ng-model="username"
+                                   data-ng-model="temp.username"
                                    data-ng-pattern="/[0-9a-z\_]/g"
                                    data-ng-minlength="3"
                                    data-ng-maxlength="20"
                                    placeholder="Username"
                                    required>
                             <!-- Validate message -->
-                            <p class="help-block" data-ng-show="form.username.$dirty && form.username.$error.required">Required!</p>
-                            <p class="help-block" data-ng-show="form.username.$dirty && form.username.$error.minlength">Too short!</p>
-                            <p class="help-block" data-ng-show="form.username.$dirty && form.username.$error.maxlength">Too looong!</p>
-                            <p class="help-block" data-ng-show="form.username.$dirty && form.username.$error.pattern">Invalid!</p>
+                            <p class="help-block" data-ng-show="formAdd.username.$dirty && formAdd.username.$error.required">Required!</p>
+                            <p class="help-block" data-ng-show="formAdd.username.$dirty && formAdd.username.$error.minlength">Too short!</p>
+                            <p class="help-block" data-ng-show="formAdd.username.$dirty && formAdd.username.$error.maxlength">Too looong!</p>
+                            <p class="help-block" data-ng-show="formAdd.username.$dirty && formAdd.username.$error.pattern">Invalid!</p>
                         </div>
 
                         <div class="form-group"
                              data-ng-class="{
-                                'has-error': form.email.$dirty && (form.email.$error.required || form.email.$error.email),
-                                'has-success': form.email.$valid}">
+                                'has-error': formAdd.email.$dirty && (formAdd.email.$error.required || formAdd.email.$error.email),
+                                'has-success': formAdd.email.$valid}">
                             <input class="form-control"
                                    type="email"
                                    name="email"
-                                   data-ng-model="email"
+                                   data-ng-model="temp.email"
                                    placeholder="Email"
                                    required>
                             <!-- Validate message -->
-                            <p class="help-block" data-ng-show="form.email.$dirty && form.email.$error.required">Required!</p>
-                            <p class="help-block" data-ng-show="form.email.$dirty && form.email.$error.email">Invalid!</p>
+                            <p class="help-block" data-ng-show="formAdd.email.$dirty && formAdd.email.$error.required">Required!</p>
+                            <p class="help-block" data-ng-show="formAdd.email.$dirty && formAdd.email.$error.email">Invalid!</p>
                         </div>
 
                         <div class="form-group">
-                            <input class="form-control" type="text" data-ng-model="address" placeholder="Address (optional)">
+                            <input class="form-control" type="text" data-ng-model="temp.address" placeholder="Address (optional)">
                         </div>
 
                         <div class="form-group">
-                            <input class="form-control" type="number" data-ng-model="phone" placeholder="Phone (optional)">
+                            <input class="form-control" type="number" data-ng-model="temp.phone" placeholder="Phone (optional)">
                         </div>
 
                         <div class="form-group">
-                            <button class="btn btn-success" type="submit" ladda="createLo" data-ng-click="create()" data-ng-disabled="form.$invalid">Add</button>
+                            <button class="btn btn-success" ladda="createLoading" data-ng-click="create()" data-ng-disabled="formAdd.$invalid">Add</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        <pre>{{form | json}}</pre>
+        <pre>{{formAdd | json}}</pre>
     </div>
 
 
