@@ -11,8 +11,7 @@
         ])
         .config(laddaConfig)
         .run(editableConfig)
-        .controller('UserController', UserController)
-        .filter('', function() {});
+        .controller('UserController', UserController);
 
     // Function ladda config
     function laddaConfig(laddaProvider) {

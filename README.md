@@ -1,4 +1,4 @@
-### Important!
+### Instructions
 ---
 
 To view this demo, please follow some steps below:

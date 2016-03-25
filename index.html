@@ -40,7 +40,7 @@
                             <tr data-ng-show="users.length == 0">
                                 <td class="text-center" colspan="7">No user in here!</td>
                             </tr>
-                            <tr data-ng-repeat="user in users track by $index | filter: searchUserName">
+                            <tr data-ng-repeat="user in users track by $index">
                                 <td>
                                     <div editable-text="user.name">{{user.name}}</div>
                                     <!-- <a href="#" editable-text="user.name">{{ user.name || "empty" }}</a> -->
