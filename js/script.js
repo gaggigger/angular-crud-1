@@ -1,4 +1,4 @@
-(function() {
+(function(angular) {
     'use strict';
 
     angular
@@ -6,12 +6,11 @@
             'oitozero.ngSweetAlert',
             'angular-ladda',
             'toaster',
-            'ngAnimate',
-            'xeditable'
+            'ngAnimate'
         ])
         .config(laddaConfig)
-        .run(editableConfig)
-        .controller('UserController', UserController);
+        .controller('UserController', UserController)
+        .filter('searchFilter', searchFilter);
 
     // Function ladda config
     function laddaConfig(laddaProvider) {
@@ -21,15 +20,10 @@
         });
     }
 
-    // Function editable config
-    function editableConfig(editableOptions) {
-        editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
-    }
-
     // Function Usercontroller
     function UserController($scope, $http, SweetAlert, $timeout, toaster) {
         $scope.users = [];
-        $scope.temp = {};
+        $scope.loadingData = true;
         var url = 'http://localhost:3000/users/';
 
         // GET
@@ -39,6 +33,7 @@
             url: url
         }).success(function(data) {
             $scope.users = data;
+            $scope.loadingData = false;
             // console.log($scope.users);
         }).error(function(data, status, headers, config) {
             console.log('Error');
@@ -46,7 +41,7 @@
 
         // DELETE
         // ------
-        $scope.delete = function(id, index, name) {
+        $scope.deleteUser = function(id, index, name) {
             // Using angular sweet alert to confirm delete or not?
             SweetAlert.swal({
                 title: "Are you sure?",
@@ -80,7 +75,7 @@
 
         // CREATE
         // ------
-        $scope.create = function() {
+        $scope.createUser = function() {
             $scope.createLoading = true;
 
             var formData = $scope.temp;
@@ -116,5 +111,29 @@
                 toaster.pop('error', "Can not created");
             });
         };
+
+        // UPDATE
+        // ------
+        $scope.updateUser = function(index) {
+            $scope.selected = index;
+        };
     }
-})();
+
+    // Function search filter
+    function searchFilter() {
+        return function(arr, searchString) {
+            if(!searchString){
+                return arr;
+            }
+            var result = [];
+            searchString = searchString.toString().toLowerCase();
+
+            angular.forEach(arr, function(item) {
+                if(item.username.toString().toLowerCase().indexOf(searchString) !== -1) {
+                    result.push(item);
+                }
+            });
+            return result;
+        };
+    }
+})(window.angular);
