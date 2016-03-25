@@ -126,10 +126,10 @@
                 return arr;
             }
             var result = [];
-            searchString = searchString.toString().toLowerCase();
+            searchString = String(searchString).toLowerCase();
 
             angular.forEach(arr, function(item) {
-                if(item.username.toString().toLowerCase().indexOf(searchString) !== -1) {
+                if(String(item.username).toLowerCase().indexOf(searchString) !== -1) {
                     result.push(item);
                 }
             });
