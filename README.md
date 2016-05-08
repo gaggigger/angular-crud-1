@@ -18,3 +18,11 @@ To view this demo, please follow some steps below:
 + [Angular Sweet Alert](https://github.com/oitozero/ngSweetAlert)
 + [Angular Ladda](https://github.com/remotty/angular-ladda)
 + [Angular Toaster](https://github.com/jirikavi/AngularJS-Toaster)
+
+### Todos
+---
+
+A few things need to do:
+
++ Add array error
++ Function: Update
