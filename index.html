@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="bower_components/sweetalert/dist/sweetalert.css">
     <link rel="stylesheet" href="bower_components/ladda/dist/ladda-themeless.min.css">
     <link rel="stylesheet" href="bower_components/AngularJS-Toaster/toaster.min.css">
+    <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -16,11 +17,14 @@
                 <h3 class="title">Demo crud App</h3>
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <div class="row">
+                        <div class="row grid-flex-container">
                             <div class="col-md-4">
                                 <form action="#" class="form-search">
                                     <input type="text" class="form-control" placeholder="Search username" data-ng-model="searchUserName">
                                 </form>
+                            </div>
+                            <div class="col-md-8 text-right">
+                                <strong style="font-size: 20px">{{users.length}}</strong> users available!
                             </div>
                         </div>
                     </div>
@@ -58,8 +62,8 @@
                                     <tr data-ng-if="users.length == 0 && !loadingData">
                                         <td class="text-center" colspan="7">No user in here!</td>
                                     </tr>
-                                    <tr data-ng-if="$root.noResult">
-                                        <td class="text-center" colspan="7">No result!</td>
+                                    <tr data-ng-if="(users | filter:searchUserName).length == 0">
+                                        <td class="text-center" colspan="7">No result to display</td>
                                     </tr>
 
                                     <tr data-ng-repeat="user in users | searchFilter:searchUserName track by $index" data-ng-click="updateUser($index)" data-ng-class="{'selected': selected === $index}">
@@ -69,7 +73,9 @@
                                         <td>{{user.address}}</td>
                                         <td>{{user.phone}}</td>
                                         <td class="action">
-                                            <button class="btn btn-info" type="button" data-ng-click="editUser(user.id)">Edit</button>
+                                            <button class="btn btn-edit" type="button" data-ng-click="toggleText = !toggleText" ng-class="{'btn-info': !toggleText, 'btn-warning': toggleText}">
+                                                {{!toggleText? "Edit" : "Editing..."}}
+                                            </button>
                                         </td>
                                         <td class="action">
                                             <button class="btn btn-danger" type="button" data-ng-click="deleteUser(user.id, $index, user.name)">Delete</button>
@@ -84,7 +90,7 @@
             <div class="col-md-3">
                 <div class="panel panel-default block-add-user">
                     <div class="panel-heading">
-                        <h4 class="title-add-user">Add user</h4>
+                        <h4 class="title-add-user">{{updateUserTurnOn ? "Update user" : "Add user"}}</h4>
                     </div>
                     <div class="panel-body">
                         <form action="#" novalidate name="formAdd">
@@ -191,6 +197,8 @@
     <!-- Toaster -->
     <script src="bower_components/angular-animate/angular-animate.min.js"></script>
     <script src="bower_components/AngularJS-Toaster/toaster.min.js"></script>
+    <!-- Xeditable -->
+    <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
     <!-- Main -->
     <script src="js/script.js"></script>
 </body>

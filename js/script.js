@@ -24,6 +24,8 @@
     function UserController($scope, $http, SweetAlert, $timeout, toaster) {
         $scope.users = [];
         $scope.loadingData = true;
+        $scope.toggleText = false;
+        $scope.updateUserTurnOn = false;
         var url = 'http://localhost:3000/users/';
 
         // GET
@@ -116,7 +118,12 @@
         // ------
         $scope.updateUser = function(index) {
             $scope.selected = index;
+            $scope.updateUserTurnOn = true;
         };
+
+        // $scope.editUser = function(index) {
+        //     console.log();
+        // }
     }
 
     // Function search filter

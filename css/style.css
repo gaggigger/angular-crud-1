@@ -37,6 +37,18 @@ table-bordered>thead>tr>th, .table-bordered>thead>tr>th, table-bordered>tbody>tr
 .table tbody tr.selected {
     background-color: #f9f9f9;
 }
+.btn-edit {
+  min-width: 80px;
+}
+.grid-flex-container {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -ms-align-items: center;
+  align-items: center;
+}
 
 /* Loading */
 .sk-fading-circle {
